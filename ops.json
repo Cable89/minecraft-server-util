@@ -1,0 +1,44 @@
+[
+  {
+    "uuid": "de883ce0-de21-4ad8-9b32-52745515c9e7",
+    "name": "Rosaskjorte",
+    "level": 4,
+    "bypassesPlayerLimit": false
+  },
+  {
+    "uuid": "7caf3a3c-dc56-4b2f-b972-6460a70e960e",
+    "name": "Zreder",
+    "level": 4,
+    "bypassesPlayerLimit": false
+  },
+  {
+    "uuid": "f60eb4fc-c97d-4827-92d8-0ee1c250d272",
+    "name": "Sigcraft",
+    "level": 4,
+    "bypassesPlayerLimit": false
+  },
+  {
+    "uuid": "ceb6b95f-c6d5-4de9-b8b8-4a8d887d8c6b",
+    "name": "Einhen",
+    "level": 4,
+    "bypassesPlayerLimit": false
+  },
+  {
+    "uuid": "2dbb8a3c-111d-4dd1-ada7-b44dc953ce49",
+    "name": "Njardrotnen",
+    "level": 4,
+    "bypassesPlayerLimit": false
+  },
+  {
+    "uuid": "afe3d84d-9607-49de-aeef-133d0c434730",
+    "name": "JakobLover",
+    "level": 4,
+    "bypassesPlayerLimit": false
+  },
+  {
+    "uuid": "699d3698-28fe-4a90-bd4e-682eada04038",
+    "name": "cable89",
+    "level": 4,
+    "bypassesPlayerLimit": false
+  }
+]

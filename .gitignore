@@ -1,0 +1,10 @@
+*.jar
+*.pyc
+*.log
+logs/
+overviewer113/
+overviewer113_oysm/
+island/
+arch/
+crash-reports/
+eula.txt
