@@ -45,7 +45,7 @@ function server_check {
 function start_minecraft {
     echo "Starting Minecraft"
     screen -S $SCREEN -d -m
-    screen -S $SCREEN -p 0 -X stuff "java -Xmx$JXMX -Xms$JXMS -jar $MINECRAFTDIR/$MINECRAFT_SERVER nogui --forceUpgrade
+    screen -S $SCREEN -p 0 -X stuff "java -Xmx$JXMX -Xms$JXMS -jar $MINECRAFTDIR/$MINECRAFT_SERVER nogui
 "
 }
 
