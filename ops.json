@@ -40,5 +40,11 @@
     "name": "cable89",
     "level": 4,
     "bypassesPlayerLimit": false
+  },
+  {
+    "uuid": "bfa4d152-dac8-4387-9c02-91538bfb1261",
+    "name": "Rokreder",
+    "level": 4,
+    "bypassesPlayerLimit": false
   }
 ]
