@@ -16,21 +16,23 @@ def _PlayerSpawns(poi):
 renders["survivalday"] = {
 "world": "island",
 "title": "Overworld",
-"rendermode": smooth_lighting,
+"rendermode": normal,
 "dimension": "overworld",
 "northdirection" : "upper-right",
 "manualpois": stations.overworld,
 "markers": [dict(name='Player', filterFunction=_PlayerIcons),
             dict(name='PlayerSpawn', filterFunction=_PlayerSpawns),
-            dict(name='Station', filterFunction=stations.filterfunction, icon="icons/marker_transport_yellow.png", checked='True')],
+            dict(name='Station', filterFunction=stations.filterfunction, icon="icons/marker_transport_yellow.png", checked='True'),
+            dict(name='Exploration Station', filterFunction=stations.explorationfilterfunction, icon="icons/marker_transport_yellow.png")],
+"imgquality": 10
 }
 
-renders["biomeoverlay"] = {
-"world": "island",
-"title": "Biomes",
-"rendermode": [ClearBase(), BiomeOverlay()],
-"northdirection": "upper-right",
-}
+#renders["biomeoverlay"] = {
+#"world": "island",
+#"title": "Biomes",
+#"rendermode": [ClearBase(), BiomeOverlay()],
+#"northdirection": "upper-right",
+#}
 
 renders["survivalnether"] = {
 "world": "island",
@@ -40,6 +42,7 @@ renders["survivalnether"] = {
 "northdirection" : "upper-right",
 "manualpois": stations.nether,
 "markers": [dict(name='Station', filterFunction=stations.filterfunction, icon="icons/marker_transport_yellow.png", checked='True')],
+"imgquality": 10
 }
 
 renders["survivalend"] = {
@@ -48,6 +51,7 @@ renders["survivalend"] = {
 "rendermode": normal,
 "dimension": "end",
 "northdirection" : "upper-right",
+"imgquality": 10
 }
 
 processes = 4
