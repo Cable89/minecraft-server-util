@@ -25,7 +25,7 @@ fi
 
 JXMX=8G
 JXMS=8G
-MINECRAFT_SERVER=minecraft_server.1.13.1.jar
+MINECRAFT_SERVER=spigot-1.16.1.jar
 
 SCREEN=minecraft
 MESSAGE="Server restarting in "$(($DELAY + 10))" seconds!"
@@ -39,13 +39,14 @@ BACKUPFILE=$BACKUPDIR/$WORLDNAME.backup.$TIMESTAMP.tar.gz
 
 
 function server_check {
-    ONLINE=$(ps aux | grep "$MINECRAFTDIR/minecraft_server.*.jar nogui" | wc -l) 
+    ONLINE=$(ps aux | grep "$MINECRAFTDIR/$MINECRAFT_SERVER nogui" | wc -l) 
+    SCREENEXIST=$(screen -S $SCREEN -Q select . ; echo $?) # Returns 0 if screen exists
 }
 
 function start_minecraft {
     echo "Starting Minecraft"
     screen -S $SCREEN -d -m
-    screen -S $SCREEN -p 0 -X stuff "java -Xmx$JXMX -Xms$JXMS -jar $MINECRAFTDIR/$MINECRAFT_SERVER nogui
+    screen -S $SCREEN -p 0 -X stuff "java -Xmx$JXMX -Xms$JXMS -XX:+UseConcMarkSweepGC -jar $MINECRAFTDIR/$MINECRAFT_SERVER nogui --forceUpgrade
 "
 }
 
@@ -59,7 +60,8 @@ function stop_minecraft {
 
 function run_backup {
     cd $MINECRAFTDIR
-    tar -czf $BACKUPFILE $WORLDNAME
+    # tar -czf $BACKUPFILE $WORLDNAME
+    tar -czf $BACKUPFILE $WORLDNAME ${WORLDNAME}_nether ${WORLDNAME}_the_end
     . /etc/minecraft/minecraft_backup_copy.sh &
 }
 
@@ -67,7 +69,7 @@ function run_backup {
 case "$1" in
     start)
         server_check
-        if [ $ONLINE == 2 ]; then
+        if [ $ONLINE == 2 ] || [ $SCREENEXIST == 0 ]; then
             echo "Minecraft server already running"
         fi
         echo "Starting minecraft server"
@@ -80,7 +82,7 @@ case "$1" in
     restart)
         echo "Restarting minecraft server"        
         server_check
-        if [ $ONLINE == 2 ]; then
+        if [ $ONLINE == 2 ] || [ $SCREENEXIST == 0 ]; then
             stop_minecraft
         fi
         start_minecraft
@@ -105,6 +107,8 @@ case "$1" in
             echo "Minecraft server is running"
         elif [ $ONLINE == 1 ]; then
             echo "Minecraft server process not found"
+        else
+            echo $ONLINE
         fi
     ;;
     *)
