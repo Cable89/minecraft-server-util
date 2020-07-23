@@ -67,6 +67,14 @@ exploration14 = {'id': 'Exploration Station', 'x':-8192, 'y':80, 'z': 4096, 'nam
 exploration15 = {'id': 'Exploration Station', 'x':-8192, 'y':80, 'z':    0, 'name':'Magenta Exploration Station'}
 exploration16 = {'id': 'Exploration Station', 'x':-8192, 'y':80, 'z':-4096, 'name':'Pink Exploration Station'}
 
+end1 = {'id': 'Station', 'x':120, 'y':80, 'z':0, 'name':'Arrival'}
+end2 = {'id': 'Station', 'x':14, 'y':80, 'z':-14, 'name':'XP Farm'}
+end3 = {'id': 'Station', 'x':0, 'y':80, 'z':0, 'name':'Heim te mor'}
+end4 = {'id': 'Station', 'x':0, 'y':80, 'z':-80, 'name':'Further down the rabbit hole'}
+end5 = {'id': 'Station', 'x':-84, 'y':80, 'z':35, 'name':'Teleport1'}
+end6 = {'id': 'Station', 'x':-1092, 'y':80, 'z':324, 'name':'Teleport1'}
+end7 = {'id': 'Station', 'x':-2506, 'y':80, 'z':225, 'name':'Teleport1'}
+
 overworld = [overworld1,
              overworld2,
              overworld3,
@@ -110,3 +118,5 @@ for station in nether:
     station['x'] = station['x']/8
     station['y'] = 120
     station['z'] = station['z']/8
+
+end = [end1, end2, end3, end4, end5, end6, end7]
