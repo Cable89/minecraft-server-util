@@ -1,142 +1,90 @@
 import copy
 import sys
 
-# File format based on: https://github.com/overviewer/Minecraft-Overviewer/pull/1649
-
 def filterfunction(poi):
     if poi['id'] == 'Station':
-        return (poi['name'], poi['description'])
+        return poi['name']
 
 def explorationfilterfunction(poi):
     if poi['id'] == 'Exploration Station':
-        return (poi['name'], poi['description'])
+        return poi['name']
 
-stations = {}
+overworld1  = {'id': 'Station',
+               'x':-4096,
+               'y':80,
+               'z':-4096,
+               'name':'Planlagt Ikke Navngitt Sentralstasjon'}
+overworld2 = {'id': 'Station',
+              'x':0,
+              'y':80,
+              'z':-4096,
+              'name':'Terese Jordhaug Stavkirke Sentralstasjon'}
+overworld3 = {'id': 'Station',
+              'x':4096,
+              'y':80,
+              'z':-4096,
+              'name':'Planlagt Ikke Navngitt Sentralstasjon'}
+overworld4  = {'id': 'Station',
+               'x':4096,
+               'y':80,
+               'z':0,
+               'name':'Hellopolis Sentralstasjon'}
+overworld5 = {'id': 'Station',
+              'x':4096,
+              'y':80,
+              'z':4096,
+              'name':'Flyvende Ey Sentralstasjon'}
+overworld6  = {'id': 'Station',
+               'x':0,
+               'y':80,
+               'z':4096,
+               'name':'Endor Sentralstasjon'}
+overworld7 = {'id': 'Station',
+              'x':-4096,
+              'y':80,
+              'z':4096,
+              'name':'Obsidian Spire Sentralstasjon'}
+overworld8 = {'id': 'Station',
+              'x':-4096,
+              'y':80,
+              'z':0,
+              'name':'Serengeti Sentralstasjon'}
 
-stations["overworld"] = {
-    "Noname1 Sentralstasjon":{
-        'x':-4096,  'y':80, 'z':-4096,
-        'description':'Planlagt Ikke Navngitt Sentralstasjon'
-    },
-    "Terese Jordhaug Stavkirke Sentralstasjon":{
-        'x':0,      'y':80, 'z':-4096,
-        'description':''
-    },
-    "Noname2 Sentralstasjon":{
-        'x':4096,   'y':80, 'z':-4096,
-        'description':'Planlagt Ikke Navngitt Sentralstasjon'
-    },
-    "Hellopolis Sentralstasjon":{
-        'x':4096,   'y':80, 'z':0,
-        'description':''
-    },
-    "Flyvende Øy Sentralstasjon":{
-        'x':4096,   'y':80, 'z':4096,
-        'description':''
-    },
-    "Endor Sentralstasjon":{
-        'x':0,  'y':80, 'z':4096,
-        'description':''
-    },
-    "Obsidian Spire Sentralstasjon":{
-        'x':-4096,  'y':80, 'z':4096,
-        'description':''
-    },
-    "Serengeti Sentralstasjon":{
-        'x':-4096,  'y':80, 'z':0,
-        'description':''
-    },
-}
-stations["overworld-exploration"] = {
-    "White Exploration Station":{
-        'x':-8192,  'y':80, 'z':-8192,
-        'color': "white"
-    },
-    "Grey Exploration Station":{
-        'x':-4096,  'y':80, 'z':-8192,
-        'color': "gray"
-    },
-    "Dark Grey Exploration Station":{
-        'x':    0,  'y':80, 'z':-8192,
-        'color': "dark_gray"
-    },
-    "Black Exploration Station":{
-        'x': 4096,  'y':80, 'z':-8192,
-        'color': "black"
-    },
-    "Brown Exploration Station":{
-        'x': 8192,  'y':80, 'z':-8192,
-        'color': "brown"
-    },
-    "Red Exploration Station"
-        'x': 8192,  'y':80, 'z':-4096,
-        'color': "red"
-    },
-    "Orange Exploration Station":{
-        'x': 8192,  'y':80, 'z':    0,
-        'color': "orange"
-    },
-    "Yellow Exploration Station":{
-        'x': 8192,  'y':80, 'z': 4096,
-        'color': "yellow"
-    },
-    "Lime Exploration Station":{
-        'x': 8192,  'y':80, 'z': 8192,
-        'color': "lime"
-    },
-    "Green Exploration Station":{
-        'x': 4096,  'y':80, 'z': 8192,
-        'color': "green"
-    },
-    "Cyan Exploration Station":{
-        'x':    0,  'y':80, 'z': 8192,
-        'color': "cyan"
-    },
-    "Light Blue Exploration Station":{
-        'x':-4096,  'y':80, 'z': 8192,
-        'color': "light_blue"
-    },
-    "Blue Exploration Station":{
-        'x':-8192,  'y':80, 'z': 8192,
-        'color': "blue"
-    },
-    "Purple Exploration Station":{
-        'x':-8192,  'y':80, 'z': 4096,
-        'color': "purple"
-    },
-    "Magenta Exploration Station":{
-        'x':-8192,  'y':80, 'z':    0,
-        'color': "magenta"
-    },
-    "Pink Exploration Station":{
-        'x':-8192,  'y':80, 'z':-4096,
-        'color': "pink"
-    },
-}
 
-stations["end"] = {
-    "Arrival":{
-        'x':120,    'y':80, 'z':0,
-    },
-    "XP Farm":{
-        'x':14,     'y':80, 'z':-14,
-    },
-    "Heim te mor":{
-        'x':0,      'y':80, 'z':0,
-    },
-    "Further down the rabbit hole":{
-        'x':0,      'y':80, 'z':-80,
-    },
-    "Teleport1-1":{
-        'x':-84,    'y':80, 'z':35,
-    },
-    "Teleport1-2":{
-        'x':-1092,  'y':80, 'z':324,
-    },
-    "Teleport1-3":{
-        'x':-2506,  'y':80, 'z':225,
-    },
-}
+exploration01 = {'id': 'Exploration Station', 'x':-8192, 'y':80, 'z':-8192, 'name':'White Exploration Station'}
+exploration02 = {'id': 'Exploration Station', 'x':-4096, 'y':80, 'z':-8192, 'name':'Grey Exploration Station'}
+exploration03 = {'id': 'Exploration Station', 'x':    0, 'y':80, 'z':-8192, 'name':'Dark Grey Exploration Station'}
+exploration04 = {'id': 'Exploration Station', 'x': 4096, 'y':80, 'z':-8192, 'name':'Black Exploration Station'}
+exploration05 = {'id': 'Exploration Station', 'x': 8192, 'y':80, 'z':-8192, 'name':'Brown Exploration Station'}
+exploration06 = {'id': 'Exploration Station', 'x': 8192, 'y':80, 'z':-4096, 'name':'Red Exploration Station'}
+exploration07 = {'id': 'Exploration Station', 'x': 8192, 'y':80, 'z':    0, 'name':'Orange Exploration Station'}
+exploration08 = {'id': 'Exploration Station', 'x': 8192, 'y':80, 'z': 4096, 'name':'Yellow Exploration Station'}
+exploration09 = {'id': 'Exploration Station', 'x': 8192, 'y':80, 'z': 8192, 'name':'Green Exploration Station'}
+exploration10 = {'id': 'Exploration Station', 'x': 4096, 'y':80, 'z': 8192, 'name':'Dark Green Exploration Station'}
+exploration11 = {'id': 'Exploration Station', 'x':    0, 'y':80, 'z': 8192, 'name':'Cyan Exploration Station'}
+exploration12 = {'id': 'Exploration Station', 'x':-4096, 'y':80, 'z': 8192, 'name':'Light Blue Exploration Station'}
+exploration13 = {'id': 'Exploration Station', 'x':-8192, 'y':80, 'z': 8192, 'name':'Blue Exploration Station'}
+exploration14 = {'id': 'Exploration Station', 'x':-8192, 'y':80, 'z': 4096, 'name':'Purple Exploration Station'}
+exploration15 = {'id': 'Exploration Station', 'x':-8192, 'y':80, 'z':    0, 'name':'Magenta Exploration Station'}
+exploration16 = {'id': 'Exploration Station', 'x':-8192, 'y':80, 'z':-4096, 'name':'Pink Exploration Station'}
+
+end1 = {'id': 'Station', 'x':120, 'y':80, 'z':0, 'name':'Arrival'}
+end2 = {'id': 'Station', 'x':14, 'y':80, 'z':-14, 'name':'XP Farm'}
+end3 = {'id': 'Station', 'x':0, 'y':80, 'z':0, 'name':'Heim te mor'}
+end4 = {'id': 'Station', 'x':0, 'y':80, 'z':-80, 'name':'Further down the rabbit hole'}
+end5 = {'id': 'Station', 'x':-84, 'y':80, 'z':35, 'name':'Teleport1'}
+end6 = {'id': 'Station', 'x':-1092, 'y':80, 'z':324, 'name':'Teleport1'}
+end7 = {'id': 'Station', 'x':-2506, 'y':80, 'z':225, 'name':'Teleport1'}
+
+overworld = [overworld1,
+             overworld2,
+             overworld3,
+             overworld4,
+             overworld5,
+             overworld6,
+             overworld7,
+             overworld8]
+
 exploration = [exploration01,
                exploration02,
                exploration03,
@@ -173,7 +121,3 @@ for station in nether:
     station['z'] = station['z']/8
 
 end = [end1, end2, end3, end4, end5, end6, end7]
-
-def stationPois(dimension):
-    stp = stationToPoi(dimension):
-    return [stp(name, info) for name, info in stations[dimension].items()]
