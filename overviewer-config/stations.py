@@ -13,7 +13,9 @@ def explorationfilterfunction(poi):
 
 stations = {}
 
-stations["overworld"] = {
+stations["overworld"] = {"Sentralstasjon":{}, "Exploration Station":{}}
+
+stations["overworld"]["Sentralstasjon"] = {
     "Noname1 Sentralstasjon":{
         'x':-4096,  'y':80, 'z':-4096,
         'description':'Planlagt Ikke Navngitt Sentralstasjon'
@@ -47,7 +49,7 @@ stations["overworld"] = {
         'description':''
     },
 }
-stations["overworld-exploration"] = {
+stations["overworld"]["Exploration Station"] = {
     "White Exploration Station":{
         'x':-8192,  'y':80, 'z':-8192,
         'color': "white"
@@ -114,7 +116,8 @@ stations["overworld-exploration"] = {
     },
 }
 
-stations["end"] = {
+stations["end"] = {}
+stations["end"]["Stasjon"] = {
     "Arrival":{
         'x':120,    'y':80, 'z':0,
     },
@@ -137,22 +140,6 @@ stations["end"] = {
         'x':-2506,  'y':80, 'z':225,
     },
 }
-exploration = [exploration01,
-               exploration02,
-               exploration03,
-               exploration04,
-               exploration05,
-               exploration06,
-               exploration07,
-               exploration08,
-               exploration09,
-               exploration10,
-               exploration11,
-               exploration12,
-               exploration13,
-               exploration14,
-               exploration15,
-               exploration16]
 
 overworld.extend(exploration)
 
@@ -174,6 +161,19 @@ for station in nether:
 
 end = [end1, end2, end3, end4, end5, end6, end7]
 
+def stationToPoi(dimension):
+    def _stationToPoi(name, info):
+        return {
+            "id": "Station",
+            "x": info["x"],
+            "y": 64,
+            "z": info["z"],
+            "text": name,
+            "icon": "icons/station_" + info["color"] + ".png",
+            }
+        return _subwayStationToPoi
+
+
 def stationPois(dimension):
-    stp = stationToPoi(dimension):
+    stp = stationToPoi(dimension)
     return [stp(name, info) for name, info in stations[dimension].items()]
