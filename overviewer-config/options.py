@@ -1,5 +1,6 @@
 import sys
 sys.path.append('/etc/minecraft')
+sys.path.append('/etc/minecraft/overviewer-config')
 import stations
 import railways
 import custom_pois
