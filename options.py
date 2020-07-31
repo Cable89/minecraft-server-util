@@ -1,6 +1,8 @@
 import sys
 sys.path.append('/etc/minecraft')
 import stations
+import railways
+import custom_pois
 
 worlds["island"] = "/etc/minecraft/island"
 worlds["island_nether_old"] = "/etc/minecraft/island_nether_old"
@@ -20,11 +22,16 @@ renders["survivalday"] = {
 "rendermode": normal,
 "dimension": "overworld",
 "northdirection" : "upper-right",
-"manualpois": stations.overworld,
-"markers": [dict(name='Player', filterFunction=_PlayerIcons),
+"manualpois": stations.overworld + railways.overworld + custom_pois.overworld,
+"markers": [
+            dict(name='Player', filterFunction=_PlayerIcons),
             dict(name='PlayerSpawn', filterFunction=_PlayerSpawns),
+            custom_pois.overworldBaseDict,
+            #custom_pois.overworldBannerDict,
             dict(name='Station', filterFunction=stations.filterfunction, icon="icons/marker_transport_yellow.png", checked='True'),
-            dict(name='Exploration Station', filterFunction=stations.explorationfilterfunction, icon="icons/marker_transport_yellow.png")],
+            dict(name='Exploration Station', filterFunction=stations.explorationfilterfunction, icon="icons/marker_transport_yellow.png"),
+            dict(name='Railways', filterFunction=railways.filterfunction)
+            ],
 "imgquality": 10,
 "defaultzoom": 4,
 "rerenderprob": 0.1
@@ -81,6 +88,24 @@ renders["survivalend"] = {
             dict(name='Station', filterFunction=stations.filterfunction, icon="icons/marker_transport_yellow.png")],
 "imgquality": 10,
 "defaultzoom": 6
+}
+
+renders["cavetest"] = {
+"world": "island",
+"title": "Cave test",
+"dimension": "overworld",
+"northdirection" : "upper-right",
+"crop": [(-321, -1344, -192, -1473),(728, 0, 832, 128)],
+"rendermode": cave
+}
+
+renders["cavetestlowerleft"] = {
+"world": "island",
+"title": "Cave test2",
+"dimension": "overworld",
+"northdirection" : "lower-left",
+"crop": [(-321, -1344, -192, -1473),(728, 0, 832, 128)],
+"rendermode": cave
 }
 
 processes = 4
