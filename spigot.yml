@@ -12,6 +12,7 @@
 
 config-version: 12
 settings:
+  log-named-deaths: true
   log-villager-deaths: true
   debug: false
   save-user-cache-on-stop-only: false
@@ -61,6 +62,9 @@ advancements:
   - minecraft:story/disabled
 world-settings:
   default:
+    below-zero-generation-in-existing-chunks: true
+    simulation-distance: default
+    thunder-chance: 100000
     seed-endcity: 10387313
     seed-bastion: 30084232
     seed-fortress: 30084232
@@ -141,3 +145,5 @@ world-settings:
     hanging-tick-frequency: 100
     zombie-aggressive-towards-villager: true
     nerf-spawner-mobs: false
+players:
+  disable-saving: false
