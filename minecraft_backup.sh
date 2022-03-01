@@ -25,7 +25,7 @@ fi
 
 JXMX=8G
 JXMS=8G
-MINECRAFT_SERVER=spigot-1.16.1.jar
+MINECRAFT_SERVER=minecraft_server.jar
 
 SCREEN=minecraft
 MESSAGE="Server restarting in "$(($DELAY + 10))" seconds!"
@@ -46,7 +46,14 @@ function server_check {
 function start_minecraft {
     echo "Starting Minecraft"
     screen -S $SCREEN -d -m
-    screen -S $SCREEN -p 0 -X stuff "java -Xmx$JXMX -Xms$JXMS -XX:+UseConcMarkSweepGC -jar $MINECRAFTDIR/$MINECRAFT_SERVER nogui
+    screen -S $SCREEN -p 0 -X stuff "java -Xmx$JXMX -Xms$JXMS -jar $MINECRAFTDIR/$MINECRAFT_SERVER nogui
+"
+}
+
+function start_minecraft_forceupgrade {
+    echo "Starting Minecraft"
+    screen -S $SCREEN -d -m
+    screen -S $SCREEN -p 0 -X stuff "java -Xmx$JXMX -Xms$JXMS -jar $MINECRAFTDIR/$MINECRAFT_SERVER --forceUpgrade nogui
 "
 }
 
@@ -65,6 +72,9 @@ function run_backup {
     . /etc/minecraft/minecraft_backup_copy.sh &
 }
 
+function update_spigot {
+    . /etc/minecraft/minecraft_update_spigot.sh &
+}
 
 case "$1" in
     start)
@@ -74,6 +84,14 @@ case "$1" in
         fi
         echo "Starting minecraft server"
         start_minecraft
+    ;;
+    start_forceupgrade)
+        server_check
+        if [ $ONLINE == 2 ] || [ $SCREENEXIST == 0 ]; then
+            echo "Minecraft server already running"
+        fi
+        echo "Starting minecraft server"
+        start_minecraft_forceupgrade
     ;;
     stop)
         echo "Stopping minecraft server"
@@ -87,6 +105,16 @@ case "$1" in
         fi
         start_minecraft
     ;;
+    update_spigot)
+        echo "Updating minecraft server"
+        server_check
+        update_spigot
+        echo "Restarting minecraft server"
+        if [ $ONLINE == 2 ] || [ $SCREENEXIST == 0 ]; then
+            stop_minecraft
+        fi
+        start_minecraft_forceupgrade
+    ;;
     backup)
         server_check
         if [ $ONLINE == 2 ]; then
@@ -95,6 +123,7 @@ case "$1" in
         server_check
         if [ $ONLINE == 1 ]; then
             run_backup
+            #update_spigot
             start_minecraft
         else
             echo "Unable to stop minecraft server"
@@ -112,5 +141,5 @@ case "$1" in
         fi
     ;;
     *)
-        echo  "Usage: {start|stop|restart|backup|status}"
+        echo  "Usage: {start|stop|restart|update|backup|status} <delay in ms>"
 esac
