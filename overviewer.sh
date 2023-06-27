@@ -1,6 +1,6 @@
 #!/bin/bash
 
-VERSION=1.17
+VERSION=1.19
 #wget https://overviewer.org/textures/${VERSION} -O /etc/minecraft/versions/${VERSION}.jar
 #rm /etc/minecraft/versions/client.jar
 #ln -s /etc/minecraft/versions/${VERSION}.jar /etc/minecraft/versions/client.jar

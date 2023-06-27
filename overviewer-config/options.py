@@ -39,7 +39,8 @@ renders["survivalday"] = {
 "imgquality": 10,
 "defaultzoom": 4
 #"rerenderprob": 0.1
-# "forcerender": True ## add back after rendering caves
+#"forcerender": True ## add back after rendering caves
+#"renderchecks": 1 # 1 = check-tiles
 }
 
 renders["survivalday_old"] = {
@@ -51,10 +52,10 @@ renders["survivalday_old"] = {
 "manualpois": stations.overworld + railways.overworld + custom_pois.overworld,
 "markers": overworldmarkers,
 "imgquality": 10,
-"defaultzoom": 4,
+"defaultzoom": 4
 #"rerenderprob": 0.1
 #"forcerender": True
-"renderchecks": 3 # Do not rerender
+#"renderchecks": 3 # Do not rerender
 }
 
 

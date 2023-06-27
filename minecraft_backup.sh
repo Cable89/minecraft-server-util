@@ -85,6 +85,10 @@ case "$1" in
         echo "Starting minecraft server"
         start_minecraft
     ;;
+    start_nocheck)
+        echo "Starting minecraft server"
+        start_minecraft
+    ;;
     start_forceupgrade)
         server_check
         if [ $ONLINE == 2 ] || [ $SCREENEXIST == 0 ]; then
